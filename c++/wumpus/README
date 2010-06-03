@@ -1,0 +1,256 @@
+Wumpus World Simulator
+
+CSE 5360 - Artificial Intelligence II - Spring 1996
+
+Instructor: Larry Holder (holder@cse.uta.edu)
+
+
+This document describes how to use the Wumpus World simulation in C++.  The
+wumpus simulation library contains all simulation code as well as a main
+function.  All you will need to provide is the specific code for choosing
+actions to take.
+
+
+Player Class Description
+
+The code you write will be a subclass of the class "Player".  The Player
+class performs all the interfacing to the simulation for you, as well as
+providing you with a history of seen percepts and actions taken.
+
+There are 5 methods your subclass of Player will need to implement:
+
+*	A Constructor
+
+*	A Destructor
+
+*	void reset();
+	This method is called at the beginning of each trial.  You
+	should perform whatever initialization is necessary to get
+	your Player ready for a new game.  You must call
+	Player::reset(); within this function.
+
+*	const Action process ( const Percept &percept );
+	This method is called at each step.  The percept argument is
+	the current percept for the Player at this stage in the game.
+	The percept parameter will have already been added to the
+	Percept List (see below).
+
+*	void done();
+	This method is called when a game is over, either by the
+	player leaving the cave, dying, or the maximum number of steps
+	has been reached (currently set to 1000).
+
+There are several methods implemented by the Player class that you can use
+to get information about your state:
+
+*	ActorState getState();
+	Returns a value of type ActorState with one of these values:
+	ALIVE, DEAD, or VICTORIOUS (meaning you have left the cave)
+
+*	int numGold();
+	Returns the number of Gold pieces you are holding.
+
+*	int numArrows();
+	Returns the number of Arrows you still have.
+
+*	int getScore();
+	Returns your current score.
+
+
+Global Player Variable
+
+You should create a global static variable of the type of your Player
+subclass.  This is all that is needed to add your player to the simulation.
+
+Example:	class MyPlayer : public Player
+		{ ...
+		};
+	
+		static MyPlayer myPlayer;
+
+
+Percept/Action Lists
+
+The Player class provides you with 2 history lists: perceptList and
+actionList.  These instance variables are of a class called DLList (Doubly
+Linked List, provided as part of the GNU C++ Library).  They are accessed
+via index variables of class Pix.  These are some of the methods you may
+use to access the lists.
+
+*	perceptList.empty();
+	Returns true if the list is empty.
+
+*	perceptList.length();
+	Returns the length of the List.
+
+*	perceptList.front();
+	Returns a reference to the first element in the list.  If the
+	list is empty, this will cause a fatal error.
+
+*	perceptList.rear();
+	Returns a reference to the last element in the list.  If the
+	list is empty, this will cause a fatal error.
+
+*	Pix p = perceptList.first();
+	Assigns the index variable "p" to the index of the first
+	element of the list.  If the list is empty, p is zero.
+
+*	Pix p = perceptList.last();
+	Assigns the index variable "p" to the index of the last
+	element of the list.  If the list is empty, p is zero.
+
+*	perceptList.next( p );
+	Updates the index variable "p" to the next index of the list.
+	If there is no next item in the list, p is zero.
+
+*	perceptList.prev( p );
+	Updates the index variable "p" to the previous index of the
+	list.  If there is no previous item in the list, p is zero.
+
+*	perceptList( p );
+	Return a reference to the item in the list indexed by the
+	index variable "p".
+
+actionList is accessed in the same manner.  You should use two separate
+"Pix" variables to access perceptList and actionList.
+
+
+Percept Class Description
+
+The Percept parameter is a reference to a object of class Percept.  These
+are the methods you may use to access the Percept.  The first five methods
+return 1=True and 0=False.
+
+*	int isStench();
+
+*	int isBreeze();
+
+*	int isGlitter();
+
+*	int isBump();
+
+*	int isScream();
+
+*	const String &getHint();
+	This method returns the Natural Language Hint in a GNU C++
+	Library String Object (see file string.txt for class description).
+        The NL hint allows an NL-capable agent to acquire information
+        about the world.  For example, an NL hint might be something
+        like "there is a wumpus in location 1 3" or "there is a pit
+        in front of you".  See "Compiling the Simulator" for turning
+        this percept feature on or off.
+
+*	const Image &getImage();
+	This method returns the current image as an Image class (see
+	below for more details about the class).  The image contains
+        binary bitmaps (possibly rotated and noisy) of any objects (gold,
+        pit, wumpus) appearing in the location faced by the agent.  See
+        "Compiling the Simulator" for turning this percept feature
+        on or off.
+
+You can use the output stream operator "<<" with Percept objects.  This
+will not, however, show the image data.
+
+
+Image Class
+
+The Image class stores a 2 dimensional array of binary values representing
+the image.  The image can be displayed for test purposes using the output
+stream operator "<<".
+
+*	ImageData getData();
+	This method returns the image buffer.  The ImageData type is
+	a 2 dimensional array of size IMAGE_SIZE (currently defined as
+	32).  Declare a variable of the type ImageData and use it like
+	this:
+
+	Image image = percept.getImage();
+	ImageData data = image.getData();
+	if ( data[0][0] ) ...
+
+	Or, you can use the simpler method of:
+
+	ImageData data = percept.getImage().getData();
+
+
+Actions
+
+The defined Action symbols to be returned are: TURN_LEFT, TURN_RIGHT,
+GOFORWARD, GRAB, SHOOT, CLIMB You can use the output stream operator "<<"
+with Action values.
+
+After each action, the wumpus is allowed to move (if enabled during
+simulator compilation, see "Compiling the Simulator").  Several possible
+movement patterns are available (e.g., SIT, SPIN, RANDOM, etc.), which can
+be set during compilation.  Also, the simulator can be set to randomly PICK
+from among the possible movement patterns for each run.  See the file
+lib/WumpusEnvironment.cc for more details about wumpus movement options.
+
+
+Example Players
+
+Subclasses of Player are available for you to examine/modify in the players
+directory.
+
+
+Compiling the Simulator
+
+To compile the wumpus simulator, you should first compile the library in
+the lib/ directory.  Simply go to the lib/ directory and type 'make'.
+There are two defines that you can use to control the compilation.  First,
+if you include -DFULL_SYSTEM in the DEFINES, then the NL hint and image
+percepts will be enabled.  If you include -DWUMPUS_MODE=<mode> in the
+defines, then wumpi will move according to the given <mode>, one of SIT,
+SPIN, RANDOM, BUMP_TURN, LOOP, GOTO_GOLD, GOTO_PIT and PICK.  See the file
+WumpusEnvironment.cc for explanations of these modes.  If no mode is
+defined, then SIT is used for all wumpi, i.e., no movement.  Completion of
+the library compilation produces the libwumpus.a library.
+
+To create an executable wumpus simulator, you must provide an instance of
+the player class.  Some examples are in the players/ directory.  Simply
+copy the player .cc and .hh files and type 'make'.  This will build the
+'wumpsim' executable, whose invocation options are described below.
+
+
+Simulation Invocation
+
+This assumes you have compiled your program with the name "wumpsim".
+
+Usage:	wumpsim		Run the simulation on the standard world in
+                        Figure 6.2 of Russell and Norvig.
+
+	wumpsim T	Run T trials with the standard world.
+
+	wumpsim T E	Run T trials of a random ExE world (World
+			size can be 4 to 10).  Random worlds contain
+			multiple gold pieces, pits, and Wumpi.
+
+        wumpsim T F     Run T trials of a world specified in file F.
+                        See below for description of world files.
+
+The world file given to the wumpus simulator contains the extent E of the
+world on the first line, followed by any number of lines of the following
+format:
+
+  G <x> <y>
+  P <x> <y>
+  W <x> <y> <mode>
+
+where <x> and <y> are between 0 and E-1 inclusive, and <mode> is one of:
+Sit, Spin, Random, Goto-Gold, Goto-Pit, Loop or Bump-Turn.  The wumpus
+simulator will always output to the file '.world' the specification of the
+world used, whether generated internally or pre-specified.
+
+When the simulation runs, you will see an initial description of the
+objects in the world and will see a message about what "The Agent" (which
+is the name of your Player) is doing at each step. At the end of the game,
+you will see the ending state of the game as well as your player's score.
+If you run multiple trials, each trial will show the initial state of the
+world, the steps taken, and then ending score.  After all trials, you will
+see a collection of performance analysis data for your agent.
+
+
+Authors
+
+Robert Duff (duffrd@aud.alcatel.com)
+Larry Holder (holder@cse.uta.edu)

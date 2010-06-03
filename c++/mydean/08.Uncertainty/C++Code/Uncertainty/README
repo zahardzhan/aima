@@ -1,0 +1,162 @@
+					Uncertainty Program
+
+Welcome to the wonderful world of the Uncertainty C++ directory.  This
+program demonstrates exact inference in tree-structured networks, and
+approximate inference using stochastic simulation. It is meant to be a
+companion to chapter 8 of the "Artificial Intelligence" textbook. This
+code was written by Jon Monsarrat, jgm@cs.brown.edu.
+
+Five sections describe the program:
+
+1. The problem
+2. Building the program
+3. Making example files
+4. Running the program
+5. The solution, and how to read the source code
+
+----------------------------------------------------------------------
+1. The problem
+
+The book goes into quite some detail about the problem, but here it is
+in a nutshell.
+
+A system is composed of many elements, each of which depend on each
+other. For example, a car has many parts to it. Some parts of the car
+are needed for other parts to be working. However, we don't use
+mechanical parts; instead, we use logical statements which can be true
+or false.
+
+We create a dependency network of all the statements, with
+conditional probabilities for all the nodes in the network. Given
+evidence that some statements are true or false, we want to calculate
+the probability that the other statements are true or false.
+
+This program does that in two ways:
+   1. The exact algorithm (tree-structured networks only)
+   2. An approximation algorithm (tree-structured networks)
+      This is a simplification of the algorithm Lisp algorithm
+      which works on arbitrarily-structured networks.
+----------------------------------------------------------------------
+2. Building the program
+
+The source code in this directory is complete and does not depend upon
+the Support library or any other source code from the textbook. It
+only uses standard libraries which should come any C++ compiler.
+
+You can build this program in UNIX by simply typing
+
+      make
+
+You may need to edit the Makefile to change the name of the compiler,
+if you do not have a compiler named "CC".
+
+You do not need to recompile the program to change examples. Examples
+are stored in files.
+----------------------------------------------------------------------
+3. Making example files
+
+An example file specifies the network, and the evidence that gives
+values to various nodes. It is laid out in this order:
+   1. The number of nodes and their names
+
+   2. For each node (in order):
+      a. If any parents, the number of parents and their names
+      b. The distribution of the node, conditional of the
+         values of the parents. The distribution is a list of
+         numbers. If there is no parent, then the first number
+         is the probability of the node being false, and the
+         second number is the probability of the node being true.
+
+         If there is one parent, then the first half of the numbers is
+         the distribution given the first parent is false. The second
+         half of the numbers is the distribution given the first
+         parent is true.
+
+         If there are two parents, then two "one parent distributions"
+         are placed side by side. And so on.
+
+   3. The evidence for all nodes.
+
+For the sonya example in the text
+            Pr(O)                               O
+           ----------                         /   \
+ O = True  | 0.4    |                       L       C
+ O = False | 0.6    |
+
+                Pr(L|O)                              Pr(C|O)
+          O = True | O = False                 O = True | O = False
+          ---------------------                ---------------------
+L = True  |   0.6  |   0.1    |      C = True  |   0.8  |   0.3    |
+L = False |   0.4  |   0.9    |      C = False |   0.2  |   0.7    |
+          ---------------------                ---------------------
+
+There are are many example files in this directory:
+
+    buggy.net      Simplified version of the buggy Lisp code example
+    sonya.net      Sonya example in the text
+    varsonya.net   Variation on the sonya example
+    complex.net    Somewhat more complex singly-connected network
+
+The above Sonya example is encoded in sonya.net, included below.
+
+nodes 3 O C L
+
+distribution O 0.6 0.4
+
+parents C 1 O
+distribution C 0.7 0.3 0.2 0.8
+
+parents L 1 O
+distribution L 0.9 0.1 0.4 0.6
+
+evidence L 1
+
+----------------------------------------------------------------------
+4. Running the program
+
+Usage:
+
+uncertainty <-a num> <-e> filename.net
+      -a num   Use approximate algorithm with given number of iterations
+      -e       Use exact algorithm
+----------------------------------------------------------------------
+5. The solution, and how to read the source code
+
+Because the complexity of the uncertainty algorithm lies in recursion,
+not in data structures, it was possible to make the code here quite
+close to the original Lisp code you'll find in the book. The name of
+the C++ functions are always the same as the Lisp functions, where
+possible.
+
+In the source code, we provide two implementations for comuting the
+posterior distributions of random variables in probabilistic networks
+given eveidence in the form of instantiated variables. First, we
+implement an algorithm for exact computation of posterior
+distributions by propagating causal and diagnostic support. Second, we
+implement the likelihood-weighting algorithm for estimating posterior
+distributions using stochastic simulation. The code is broken into
+sections depending on which algorithm we are using.
+
+The classes are:
+
+  Network  -- The entire network
+  Node     -- One element in the network
+  Support  -- A pair of numbers supporting likelihoods that a node = true/false
+
+We assume that all random variables are boolean valued and that only
+boundary nodes are instantiated as evidence. The value of a random
+value is either 0 (False) or 1 (True).
+
+There are 4 source files in this directory:
+
+    Network.C      Contains the network, and the main() function
+    Node.C         Represents one node in the network
+    Support.C      A pair of values representing support for falsity
+                   or truth of some node.
+    String.C       A generic strings library, a copy of the UNIX standard
+
+Start off by reading the Network class, which tells you everything at
+a very high level. The Node class holds the grungy details. The files
+Support.C and String.C just contain some helper code which does not do
+a whole lot.
+----------------------------------------------------------------------

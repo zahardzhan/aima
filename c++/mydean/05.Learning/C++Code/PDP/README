@@ -1,0 +1,65 @@
+					    PDP Program
+
+
+Welcome to the wonderful world of the PDP C++ directory. This program
+demonstrates training a neural network. It is meant to be a companion
+to chapter 5 of the "Artificial Intelligence" textbook.  This code was
+written by Jon Monsarrat, jgm@cs.brown.edu.
+
+Five sections describe the program:
+
+1. The problem
+2. Building the program
+3. Running the program
+4. The solution, and how to read the source code
+
+----------------------------------------------------------------------
+1. The problem
+
+The book goes into quite some detail about the problem, but here it is
+in a nutshell.
+
+We have a neural net and a function to train it on. Now we need to 
+figure out how to adjust the weights so that the function is learned.
+
+----------------------------------------------------------------------
+2. Building the program
+
+The source code in this directory is complete and does not depend upon
+any other source code from the textbook. It only uses standard
+and libraries which should come any C++ compiler.
+
+You can build this program in UNIX by simply typing
+
+      make
+
+You may need to edit the Makefile to change the name of the compiler,
+if you do not have a compiler named "CC".
+
+To add a function, you will need to recompile the program. You'll also
+need to recompile the program to supply your own neural net.
+
+----------------------------------------------------------------------
+3. Running the program
+
+Running the program is very simple. Just type
+
+   pdp1 [-or] [-and] [-xor] num_attempts learning_rate
+        -or  use the 2 bit or  algorithm
+        -and use the 2 bit and algorithm
+        -xor use the 2 bit xor algorithm
+        num_attempts is the number of training attempts
+        learning_rate is the learning rate, try 1 or 2
+
+The program pdp2 works similarly, but for a different neural net.
+----------------------------------------------------------------------
+5. The solution, and how to read the source code
+
+This program is quite similar to the Lisp program. The neural net
+code is stored in PDP1.C and PDP2.C. The training code is in PDP.C.
+
+There is one wrapper class, PDP, but it does not really do much.
+Effectively, this program is just a C program.
+----------------------------------------------------------------------
+
+

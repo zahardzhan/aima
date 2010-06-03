@@ -1,0 +1,88 @@
+					 Perceptron Program
+
+Welcome to the wonderful world of the Perceptron C++ directory.  This
+program demonstrates the perceptron learning algorithm with a very
+simple perceptron network, a logic threshold unit. It is meant to be a
+companion to chapter 5 of the "Artificial Intelligence" textbook. This
+code was written by Jon Monsarrat, jgm@cs.brown.edu.
+
+Four sections describe the program:
+
+1. The problem
+2. Building the program
+3. Running the program
+4. The solution, and how to read the source code
+
+----------------------------------------------------------------------
+1. The problem
+
+The book goes into quite some detail about the problem, but here it is
+in a nutshell.
+
+We have some function (let's pretend it's unknown or takes a long time
+to compute). We want a perceptron network to simulate the function.
+Unfortunately, a perceptron network must be configured with a bunch
+of weights that tell the network how to work. This program solves the
+problem by learning the weights.
+----------------------------------------------------------------------
+2. Building the program
+
+The source code in this directory is complete and does not depend upon
+the support directory or any other source code from the textbook. It
+only uses standard and libraries which should come any C++ compiler.
+
+You can build this program in UNIX by simply typing
+
+      make
+
+You may need to edit the Makefile to change the name of the compiler,
+if you do not have a compiler named "CC".
+
+You will need to recompile the program to try out new functions. This
+is because function are written in C++ and must be themselves compiled.
+----------------------------------------------------------------------
+3. Running the program
+
+Running the program is very simple. Just type
+
+   perceptron -or
+
+To try to learn the two bit "or" function. You can also type
+
+   perceptron -and     for "and"
+   perceptron -xor     for "exclusive or"
+
+These three functions come with the perceptron program, but you are
+welcome to make up your own. You'll need to read the code and
+recompile the program to do this.
+----------------------------------------------------------------------
+4. The solution, and how to read the source code
+
+This solution doesn't have much to do with the Lisp version given
+in the textbook. It's the exact same algorithm, but I chose to
+represent functions in a more C++-like way.
+
+   In the Lisp program, a function is a list of input-output
+   combinations. You never need to generate all combinations of inputs
+   because all combinations of inputs are listed explicitly in the function.
+   It is possible to have a function where only some of the input
+   values are valid.
+
+   In the C++ program, a function is a real C++ function. To get
+   all combinations of inputs, they must be generated. The perceptron
+   program does this. It is not possible to have a partially defined
+   function which does not return values for some inputs.
+   
+The classes are:
+
+   Perceptron    -- Holds the entire perceptron, and runs the learning algorithm
+   Function      -- Holds a single function, which is a pointer to a real C++
+                    function.
+
+There are only 2 source files in this directory:
+
+   Perceptron.C    The Perceptron class
+   Function.C      The Function class
+
+----------------------------------------------------------------------
+

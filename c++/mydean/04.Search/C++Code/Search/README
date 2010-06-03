@@ -1,0 +1,8 @@
+					  Search Routines
+
+There is no main() function in these files, but each demonstrates
+a different search function.
+
+    bfs.C    breadth-first search
+    dfs.C    depth-first search
+    ifs.C    iterative-deepening search

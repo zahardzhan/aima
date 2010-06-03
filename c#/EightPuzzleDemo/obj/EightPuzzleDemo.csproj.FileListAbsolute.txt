@@ -1,0 +1,9 @@
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\EightPuzzleDemo\bin\Debug\EightPuzzleDemo.exe
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\EightPuzzleDemo\bin\Debug\EightPuzzleDemo.pdb
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\EightPuzzleDemo\bin\Debug\aima.dll
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\EightPuzzleDemo\bin\Debug\aima.pdb
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\EightPuzzleDemo\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\EightPuzzleDemo\obj\Debug\EightPuzzleDemo.Form1.resources
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\EightPuzzleDemo\obj\Debug\EightPuzzleDemo.csproj.GenerateResource.Cache
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\EightPuzzleDemo\obj\Debug\EightPuzzleDemo.exe
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\EightPuzzleDemo\obj\Debug\EightPuzzleDemo.pdb

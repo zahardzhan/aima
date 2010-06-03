@@ -1,0 +1,21 @@
+nodes 7 A B C D E F G
+
+distribution A 0.6 0.4
+
+distribution B 0.6 0.4
+
+parents C 1 A
+distribution C 0.7 0.3 0.2 0.8
+
+parents D 2 A B
+distribution D 0.2 0.8 0.3 0.7 0.1 0.9 0.8 0.2
+
+distribution E 0.6 0.4
+
+parents F 1 D
+distribution F 0.7 0.3 0.4 0.6
+
+parents G 2 D E
+distribution G 0.2 0.8 0.3 0.7 0.1 0.9 0.8 0.2
+
+evidence F 1

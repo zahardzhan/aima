@@ -1,0 +1,6 @@
+AISEARCH is a C++ class library for search algorithms implemented by
+Peter Bouthoorn <peter@icce.rug.nl>. It includes implementations of
+DFS, BFS, uniform cost, best-first, bidirectional DFS/BFS, and AND/OR
+DFS/BFS search algorithms. It is available by anonymous ftp from
+obelix.icce.rug.nl:/pub/peter/ as aisearch.zip or aisearch.tar.Z.
+

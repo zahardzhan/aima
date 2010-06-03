@@ -1,0 +1,219 @@
+                       Program to Refine Plans
+
+This program, given a plan as an initial state, refines that plan
+until the goal plan is reached. The program performs a best-first
+search using a heuristic. The program stops when any plan (the goal
+plan) is found that transitions the initial state to a given goal state.
+This code was written by Kostadis Roussos, knr@cs.brown.edu.
+
+HOW DO I COMPILE IT?
+
+  1. Edit the Makefile to change the variables SUPPORT and CC if needed.
+  2. You should have the following files in this directory:
+     Conflict.C
+     Conflict.H
+     Constrain.C
+     Constraint.H
+     Heuristic.H
+     Heuristic.C
+     Link.C
+     Link.H
+     Makefile
+     Operator.C
+     Operator.H
+     Plan.C
+     Plan.H
+     Requirement.C
+     Requirement.H
+     Step.C
+     Step.H 
+     State.C
+     XDString.C
+     KRUtility.C
+     testPlan.C
+  3. Type "make" at the command line.
+  4. Run the program "refineplan". It should say 
+------------------------------------------------------------------------
+HOW DO I USE IT?
+
+  This program works exactly like the blocks world program described
+  in the text. Because this program takes a plan and refines it, 
+  you will need to define the initial values, which are:
+     -- the start step
+     -- the finish step
+     -- any constraints, conflicts, requirements, links
+     -- the initial plan
+     -- the operators which operate on the plan
+
+  Refinements of plans can be modeled as a search through a state
+  space. There is an initial state and a goal state. Each state is a plan.
+  The search function is best first search, which is described in chapter 3.
+  Best first search uses a function supplied by the user (a heuristic)
+  to generate the next state from the current state, which is (in the
+  case of the Lisp textbook) "refine".
+
+  To set up the search you need to be able to create plans. A plan consists
+  of operators, steps, constraints, conflicts, requirements, and links.
+  You must also specify the initial plan and the goal plan.
+
+  A bag is a set where some elements can be duplicated.
+
+  1. To create an operator:
+
+      a) Define three bags for the additions, deletions and preconditions of
+         the operators, like this:
+	
+         SLBag<XDString,StringComp>* additions, *deletions, *preconditions;
+         additions = new SLBag<XDString,StringComp>;
+         deletions = new SLBag<XDString,StringComp>;
+         preconditions = new SLBag<XDString,StringComp>;
+
+      b) Set the symbols corresponding to additions, deletions, and
+         preconditions, by inserting them into the bags:
+
+         additions->addMember(new XDString("on c a"));
+  
+      c) For each operator, once you have specified its additions,
+         deletions, and preconditions, you can create it like this:
+	
+         Operator* one = new Operator(additions,preconditions,deletions);
+
+  2. You can create a step with an operator "one" like this:
+	
+	Step* start = new Step(one);
+
+  3. You can create a constraint like this:
+
+	Constrain* constraint = new Constrain(step1, step2);	
+	
+  4. A conflict is created like this:
+	 
+ 	Conflict* con = new Conflict(Link1,step1);
+
+  5. You can create requirement like this:
+	
+	Requirement* req = new Requirement("on a b", step1);
+
+  6. You can create a link like this:
+	
+     Link* link = new Link(step1, step2)
+
+  7. A plan consists of a list of steps, a list of constraints, a list of
+     conflicts, a list of requirement and a list of links. You must put
+     these individual elements in a Bag to create a plan.
+
+    SLBag<Step,StepComp>* steps = new SLBag<Step,StepComp>;
+    SLBag<Constrain,ConstComp>* constraints = new SLBag<Constrain,ConstComp>;
+    SLBag<Conflict,ConflictComp>* conflicts = new SLBag<Conflict,ConflictComp>;
+    SLBag<Link,LinkComp>* links = new SLBag<Link,LinkComp>;
+    SLBag<Requirement,ReqComp>* requirements = new SLBag<Requirement,ReqComp>;
+
+  8. Once all the Bags have been created, you can add to them
+     whatever initial values the initial Plan will have by using the method
+     "addMember" and the appropriate container like this:
+	 
+     conflicts->addMember(con);
+  
+  9. You must then set up operators which will be used by the plan to
+     generate the next plans. They are a bag of operators which are passed
+     to the Plan object. You can create the operators like in step 1, and
+     the bag to contain them like in steps 7 and 8.
+
+  10. You can now create a plan passing it those containers like this:
+
+      Plan* plan = new Plan(steps, conflicts, constraints,
+                            links, requirements, operators);   
+
+  11. Pass that plan to the best first search function "best()", along with
+      a heuristic. 
+
+      Heuristic* heuristic = new Heuristic;
+      plan  = (Plan*) best(plan, plan, heuristic);
+  
+      In the textbook, a goal state is passed. However, in this implementation
+      the plan's compare function checks itself to determine whether it is
+      the goal.
+
+      The best first search returns a state, which you have to cast to
+      the type "Plan". This is the goal plan.
+
+  12. Use the display function to display the found plan.
+
+      plan->display();
+
+
+HOW DOES IT WORK, REALLY?
+
+      The implementation of this C++ program is identical to the
+      implementation found in the textbook, with minor modifications to
+      accomodate the C++ class mechanism. The functions found in the Lisp
+      text can be found here, although they are grouped differently.
+      The Lisp functions are made into methods, and the ownership of the
+      method is determined by the first parameter of the function.
+
+      The C++ implementation differs in the way the the next state is
+      generated and the goal state is found. In Lisp, external functions
+      manipulate the states, but in C++, methods of states manipulate
+      the states. 
+
+      You create a plan with initial conditions, and call the Plan::refine()
+      method. This makes plans which are put in a queue and returned, one at
+      a time, whenever Plan::makeTransition() is called.
+	
+      Plan::refine() works by first checking for conflicts. If it finds any,
+      it calls Conflict::resolve() which:
+         - constrains the clobberer to occur before the consumer of the link
+           returning the resulting plan if that can be done,
+           otherwise returning no plan.
+         - tries to constrain the producer of the link to occur before
+           the clobberer.
+
+      If there are no conflicts, refine() calls Requirement::new_step()
+      which eliminates a requirement by adding a new step and creating a new
+      plan for each applicable operator. An operator is deemed applicable by
+      Requirement::applicable(). A plan is generated by:
+         - constraining the new step to precede the old step of the
+           resolved requirement
+         - eliminating this requirement
+         - adding a link resolving the requirement with the new step
+         - and adding a new set of requirements corresponding to the
+           preconditions of the operator and updating the set of conflicts.
+
+      After calling Requirement::new_step(), refine() calls
+      Requirement::existing_step(), which
+         - eliminates a requirement using an existing step
+         - creates a new plan for each existing step that can be
+           linked to satisfy the requirement. Whether a step is linkable or
+           not is determined by Step::linkable().
+
+      The first time makeTransition() is called, refine() is called as well,
+      and the next plans are generated and put in a queue. Each time
+      makeTransition() is called after that, a plan is returned from the queue.
+      The best first search function best() stops executing when
+      Plan::compare is true. Best first search will search until there
+      are no more states to search, or it has found the goal search.
+      The compare() function checks to see if the current plan is the goal
+      plan.
+
+OBJECTS USED:
+
+       Plan : the state object
+       Step : a step that must be taken to complete a plan
+Requirement : a requirement for the plan to be completed
+       Link : resolves a requirement
+   Conflict : when two steps mutually exclude each other
+  Constrain : two steps constrained
+   Operator : operators on the state object
+
+
+NOTES:
+
+This implementation is the closest to the text and the least
+object-oriented. However, extensive use of C++ features are used, such
+as templates and inheritance. An alternative object model could be
+conceivably constructed, but the biggest obstacle was the need to use
+the best() function. An alternative implementation of this program would
+be to embed the best function in the objects themselves.
+
+
+

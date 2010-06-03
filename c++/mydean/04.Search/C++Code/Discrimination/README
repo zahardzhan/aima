@@ -1,0 +1,124 @@
+				    Discrimination Tree Program
+
+Welcome to the wonderful world of the Discrimination Tree C++
+directory.  This program demonstrates building a discrimination tree given
+some formulas, and accessing matching to a given formula. It is meant to
+be a companion to chapter 4 of the "Artificial Intelligence"
+textbook. This code was written by Jon Monsarrat, jgm@cs.brown.edu.
+
+Five sections describe the program:
+
+1. The problem
+2. Building the program
+3. Making example files
+4. Running the program
+5. The solution, and how to read the source code
+
+----------------------------------------------------------------------
+1. The problem
+
+The book goes into quite some detail about the problem, but here it is
+in a nutshell.
+
+We want to store a database of predicate calculus formulas, and
+perform fast lookups on matches. The formulas can contain variables,
+and a variable can match either a symbol, another variable, or a
+subexpression. The formulas can have arbitrarily nested subexpressions.
+
+Matching is not a unification matching. No attempt is made to filter
+out a match of ((? x) (? x)) and (a b), for example.
+
+This program reads in add (storage) and fetch (matching) commands from a file.
+
+----------------------------------------------------------------------
+2. Building the program
+
+The source code in this directory is complete and does not depend upon
+any other source code from the textbook. It only uses standard
+and libraries which should come any C++ compiler.
+
+You can build this program in UNIX by simply typing
+
+      make
+
+You may need to edit the Makefile to change the name of the compiler,
+if you do not have a compiler named "CC".
+
+You do not need to recompile the program to change examples. Examples
+are stored in files.
+----------------------------------------------------------------------
+3. Making example files
+
+An example file specifies the vertices and all the connections between them.
+It is laid out is this order:
+   1. Several commands, each on its own line:
+      a. The word "add" for storage, or the word "fetch" for lookup by matching
+      b. The formula to add or fetch:
+         i. a series of symbols, enclosed by at least one ( ) pair
+        ii. A word beginning with a '?' is a variable, otherwise it is a symbol
+
+There is only one example file in this directory:
+
+    block.examples
+
+Here is how it is laid out:
+
+add ( on block2 ( floor room17 ) )
+add ( on block1 table2 )
+add ( on ?x ?y )
+add ( on ?z ?z )
+add ( instance block block1 )
+add ( instance block block2 )
+fetch ( on ?w ?w )
+fetch ( instance block ?x )
+fetch ( on ?x ?y )
+fetch ( on a b )
+fetch ( on ?x ( floor ?y ) )
+
+----------------------------------------------------------------------
+4. Running the program
+
+Running the program is very simple. Just type
+
+   dtree filename
+
+where "filename" is the name of the example file you want to read in.
+----------------------------------------------------------------------
+5. The solution, and how to read the source code
+
+This solution is quite close to the Lisp version given in the textbook.
+
+The classes are:
+
+   DTree     -- Holds the entire discrimination tree. You can do add's, fetch's
+   Node      -- One node in the discrimination tree. Can hold formulas
+   Formula   -- A linked list of keys, with arbitrary nested subexpressions
+   Key       -- Part of a formula. May be a variable, symbol, or ( or )
+
+Additions to the DTree are performed by doing a depth first exact matching
+of all the keys in the formula to be added. If no child of a node is found
+exactly matching the next key, then a new child is created. When the
+depth first search ends, the formula is added to the node if it is not
+already present.
+
+Fetching from the DTree is done by a depth first search which matches
+each of the keys against the keys for each node's children. For any keys
+that match, the search continues.
+
+Eventually, the program may say that no matches were found, or
+it will print out the list of resulting formulas from the match.
+
+This program is reasonably straightforward, but with a couple of
+special cases when you want to match a variable against a
+subexpression, which may itself have nested subexpressions.
+
+There are 4 source files in this directory:
+
+   DTree.C      Holds the DTree class
+   Formula.C    Holds the Formula class
+   Key.C        Holds the Key class
+   Node.C       Holds the Node class
+   String.C     A generic strings library, a copy of the UNIX standard
+
+----------------------------------------------------------------------
+

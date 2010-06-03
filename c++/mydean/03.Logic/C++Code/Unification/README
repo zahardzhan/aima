@@ -1,0 +1,138 @@
+                          Unification Program
+
+This program is the C++ implementation of the unification program
+found in Chapter 3 - Logic. If you have two sentences, written
+Lisp-like into two strings, you can use this program to unify them.
+This code was written by Kostadis Roussos, knr@cs.brown.edu.
+
+HOW DO I COMPILE IT?
+
+  1. Edit the Makefile to change the variables SUPPORT and CC if needed.
+  2. You should have the following files in this directory:
+     Bind.C
+     Bind.H
+     KRUtility.C
+     LogicNode.C
+     LogicNode.H
+     Parser.C
+     Parser.H
+     XDString.C
+     testParser.C
+  3. Type "make" at the command line.
+  4. Run the program "prog". It should output the following text:
+     bindings 
+     x (mother ?z )
+     bindings 
+     y (mother ?z )
+
+HOW DO I USE IT?
+
+  This program lets you create sentences and try to unify them. You can
+  see an example of using this program in testParser.C. You can change
+  the variables in this file to do your own unifications.
+
+  1. Create the two sentences that are to be unified by creating two
+     strings, like this:
+
+     char hi[]= "(loves (mother ?z ) ?y )";
+     char jo[]= "(loves  ?x ?x  )";
+
+     Caution: you must use the exact syntax shown here.
+       -- Start a grouping with "(" and end it with a ")".
+       -- The ")" must have a space before it or else the program will not
+          parse it corerctly.
+       -- A symbol is a string of alphanumerical characters, with no spaces.
+       -- A variable always begins with a "?" character, and can only be
+          one character. "?ab" has two characters in its name, so it is
+          NOT a legal variable.
+       -- Unlike the text in the book, a variable is not enclosed by
+          "(", and ")".
+       -- Names are case-sensitive. "Mother" is different from "mother".
+
+  2. You must create the bindings database to perform unification, as
+     demonstrated in testParser.C:
+
+     BindCompare* comp = new BindCompare;
+     Queue<Binding, BindCompare>* bindings
+                      = new Queue<Binding, BindCompare>(comp);
+
+  3. Take the two sentences, and create parse trees so that you can
+     unify them.
+
+     LogicNode* node, *node2;
+     int i = 0, j = 0;
+     node = parse(hi, i);
+     node2 = parse(jo,j);
+
+  4. You can unify two parse trees with the "unify()" function.
+
+     unify(node,node2, bindings);
+
+     If unification fails the program will abort and say "does not unify".
+
+  5. After you have successfully unified the strings, the bindings database
+     will be updated automatically. You can display the bindings with
+     the "display()" method, like this:
+
+     bindings->display();  
+
+----------------------------------------------------------------------
+HOW DOES IT WORK, REALLY!
+
+Unfortunately, for the program to understand the strings as sentences,
+they must be "parsed" into a format that is easily evaluated, called a
+"parse tree". This is very similar to the way the Lisp code actually
+works.
+
+The data types are LogicNode and Binding. LogicNode is a parse node in
+the parse tree. It can have one of the three different attributes:
+   - a group node
+   - a constant node
+   - a variable type node
+
+A LogicNode also has the concept of a child nodes and a current child
+node being active. Binding represents the binding between a variable
+type and another LogicNode.
+
+The three functions are parse, unify and bind.
+
+Parse takes as paramaters the string and the starting position of the
+string to be parsed. It walks through the string creating the nodes of
+the parse tree. The parser is a simple recursive decent parser. It
+returns the root of the parse tree.
+
+Unify takes three paramaters: two LogicNodes (the roots of the two
+parse trees) and a collection of the Bindings which is implemented as
+a queue. Unify examines the type of the LogicNodes and depending on
+both types either
+   - ends the process indicating failure
+   - or attempts to bind a variable and something else
+   - or returns, having succesfully unified the two sentences.
+
+Bind takes three parameters: the LogicNodes (a,b) to bind, and the
+queue of bindings. The first parameter (a) must be a variable. Bind
+checks first to see if variable (a) was previoulsy bound. If it was,
+then Bind calls unify with a and b, where a is now what the variable a
+was bound to. If a is unbound, it then checks whether b is a variable
+and if so whether b is bound. If b is bound then unify is called with
+a and what b is bound to. Otherwise, bind verifies that a does not
+occur in b. To do that a is passed to b and b searches among its child
+nodes and their child nodes if that is the case to find a node
+identical a. If that is the case then unification fails, else a is
+bound to b, the binding is added to the queue and bind returns to the
+calling function.
+
+----------------------------------------------------------------------
+OBJECTS USED:
+
+LogicNode : the parse node 
+Binding : the bindings between LogicNodes
+
+NOTES:
+
+An alternative implementation would be to simulate multi-methods and
+have multiple objects, one for each type. That would certainly be in
+the spirite of OOP. However, it would be less clear than the
+implementation here.
+
+

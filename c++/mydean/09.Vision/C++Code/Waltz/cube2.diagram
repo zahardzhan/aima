@@ -1,0 +1,9 @@
+vertices 7 a b c d e f g
+a FORK b c d
+b ARROW g e a
+c ARROW e f a
+d ARROW f g a
+e ELL c b
+f ELL d c
+g ELL b d
+ground g d

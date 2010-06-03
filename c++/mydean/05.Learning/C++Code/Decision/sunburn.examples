@@ -1,0 +1,15 @@
+classes 2 yes no
+dimensions 4
+hair 3 blonde brown red
+height 3 short tall average
+weight 3 light heavy average
+lotion 2 yes no
+examples
+Sarah yes blonde average light   no
+Dana  no  blonde tall    average yes
+Alex  no  brown  short   average yes
+Annie yes blonde short   average no
+Emily yes red    average heavy   no
+Pete  no  brown  tall    heavy   no
+John  no  brown  average heavy   no
+Katie no  blonde short   light   yes

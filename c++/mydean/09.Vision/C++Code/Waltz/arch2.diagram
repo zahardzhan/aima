@@ -1,0 +1,31 @@
+vertices 30 a b c d e f g h i j k l m n o p q r s t u v w x y z 1 2 3 4
+a ARROW e b c
+b ELL d a
+c FORK a d g
+d FORK c b m
+e ELL a f
+f TEE e g n
+g ARROW h f c
+h TEE g i o
+i TEE h j q
+j TEE i k r
+k TEE j l t
+l TEE k m 4
+m ELL l d
+n ELL f 1
+o ARROW p 1 h
+p ELL o q
+q TEE p i r
+r TEE j s q
+s ELL r t
+t ARROW u s k
+u ELL t 4
+v ELL 2 4
+w ARROW x 1 y
+x ELL w z
+y FORK w 2 z
+z ARROW 3 x y
+1 TEE n o w
+2 ARROW v 3 y
+3 ELL z 2
+4 TEE u l v

@@ -1,0 +1,28 @@
+vertices 26 a b c d e f g h i j k l m n o p q r s t u v w x y z
+a FORK b c d
+b ARROW g e a
+c ARROW e f a
+d ARROW f g a
+e ELL c b
+f FORK d c i
+g FORK b d h
+h ARROW l g j
+i ARROW f m p
+j FORK h o k
+k ARROW m l j
+l ELL h k
+m ELL k i
+n ELL q o
+o ARROW y j n
+p ELL r i
+q ARROW n s w
+r ARROW s p x
+s ELL r q
+t ARROW w x z
+u ARROW x y z
+v ARROW y w z
+w FORK t v q
+x FORK r u t
+y FORK v u o
+z FORK t u v
+

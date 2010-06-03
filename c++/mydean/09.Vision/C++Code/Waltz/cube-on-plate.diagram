@@ -1,0 +1,14 @@
+vertices 13 a b c d e f g h i j k l m
+a FORK b c d
+b ARROW g e a
+c ARROW e f a
+d ARROW f g a
+e ELL c b
+f FORK d c i
+g FORK b d h
+h ARROW l g j
+i ARROW f m j
+j FORK h i k
+k ARROW m l j
+l ELL h k
+m ELL k i

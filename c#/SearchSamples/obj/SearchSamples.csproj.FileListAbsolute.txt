@@ -1,0 +1,9 @@
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\SearchSamples\bin\Debug\SearchSamples.exe
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\SearchSamples\bin\Debug\SearchSamples.pdb
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\SearchSamples\bin\Debug\aima.dll
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\SearchSamples\bin\Debug\aima.pdb
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\SearchSamples\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\SearchSamples\obj\Debug\SearchSamples.Form1.resources
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\SearchSamples\obj\Debug\SearchSamples.csproj.GenerateResource.Cache
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\SearchSamples\obj\Debug\SearchSamples.exe
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\SearchSamples\obj\Debug\SearchSamples.pdb

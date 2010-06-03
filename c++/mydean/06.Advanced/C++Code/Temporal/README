@@ -1,0 +1,202 @@
+                        A Temporal Reasoning Database
+
+This program holds a temporal database, which you can query.
+This code was written by Kostadis Roussos, knr@cs.brown.edu.
+
+HOW DO I COMPILE IT?
+
+  1. Edit the Makefile to change the variables SUPPORT and CC if needed.
+  2. You should have the following files in this directory:
+        CausalRuleDatabase.H
+        CausalRuleDatabase.C
+        Effects.H
+        Effects.C
+        FactDatabase.H
+        XDString.C
+        KRUtility.C
+        Project.C
+        Time.C
+        Time.H
+        
+  3. Type "make" at the command line.
+  4. Run the program "appendix". It should say
+
+          Fact Pstart time 15end time -1
+       negative
+          Fact Rstart time 10end time -1
+          positive
+          Fact Pstart time 0end time 15
+          positive
+          Fact Qstart time 0end time -1
+          positive
+       It holds
+
+    This is the same output as in the textbook, but formatted differently.
+    Infinity is represented by -1.
+
+------------------------------------------------------------------------
+HOW DO I USE IT?
+
+  1. To perform queries, you must first set up the database. The
+     initial events are put in a queue, and popped off one at a time as they
+     "occur". The facts database and the sorted queue of events are updated
+     whenever an event unifies with a causal rule. 
+
+     a. First create a SortedQueue class, which contains the initial events:
+        
+        EventCompare* comparator = new EventCompare;
+        SortedQueue<Event, EventCompare>* sorted_Queue 
+                = new SortedQueue<Event,EventCompare>(comparator);
+
+     b. Now you can create the initial events and place them in the
+        SortedQueue. The events have a integer starting time and a symbol.
+
+V        Event* event = new Event(10, "E");
+        sorted_Queue->insert(event);
+
+  2. To set up the facts database:
+
+     a. Create a FactDatabase to store the facts:
+
+        FactDatabase* facts = new FactDatabase(fact_comp);
+
+     b. You will also need to make a FactCompare object,
+        which is a comparator used to compare objects for sorting.
+
+        FactCompare* fact_comp = new FactCompare;       
+
+     c. Create the initial facts individually and add them to the database.
+        Facts have:
+          - a start time
+          - an end time, which defaults to infinity
+          - a symbol
+          - a flag to indicate whether the symbol is affirmative or negative.
+
+        Fact* fact = new Fact(0,"P",POSITIVE);
+        facts->addFact(fact);
+
+  3. Set up the causal rules:
+
+     a. Create a causal rule database to store the rules:
+
+        CausalRuleDatabase* cdatabase = new CausalRuleDatabase(crule_comp);
+
+     b. Create each causal rule:
+
+        i. Create a new Crule object with a trigger:
+
+           Crule* crule = new Crule("F");
+
+       ii. Add the antecedents and consequents to the crule. Antecedents are
+           events, and consequents are facts or events.
+
+           Adding an antecedent:
+
+              crule->addAntecedent("R");
+
+           Adding a consequent which is a Fact
+
+              crule->addConsequent(new Fact(0,"P",NEGATIVE));
+             
+           Adding a consequent which is an Event:
+                
+              crule->addConsequent(new Event(5,"F"));
+
+      iii. Add each crule to the database:
+ 
+           cdatabase->insert(crule);
+
+  4. Call the temporalUpdate() function to update the temporal database with
+     all the events in the queue.
+
+     temporalUpdate(sorted_Queue, cdatabase, facts);
+
+  5. You can display the facts like this:
+
+     facts->display();
+
+  6. You can perform a query on the database, by asking whether certain facts
+     are true at a particular time. The holds() method returns a 
+     true/false value of 1 or 0.
+         
+     facts->holds(new Fact(0,"P",1),5);
+
+------------------------------------------------------------------------
+HOW DOES IT WORK, REALLY?
+
+    There are four basic data types, each either a fact or an event.
+
+      1. The Effect class is a parent class for the facts and event classes.
+         It stores
+           - whether the effect is a fact or an event
+           - the symbol for the effect
+           - the delay from the current time before this effect takes effect.
+
+      2. The Event class is derived from Effect, and represents a point event.
+
+      3. The Fact class is derived from Effect. Facts are similar to events,
+         except that they persist over intervals of time.
+
+      4. The Crule class is a causal rule, which has:
+         - a list of antecedent conditions
+         - a symbol indicating the type of triggering event
+         - a list of consequent effects.
+
+         The antecedents are implemented with a sorted list of Facts,
+         and the consequents are implemented with a sorted list of Effects.
+
+     There are also data types which implement aggregate actions on the
+     basic data type. These are:
+
+      1. FactDatabase is a general database for facts. You can insert
+         facts, and perform queries on the database. When you insert
+         a new fact, the database automatically checks for contradictions
+         with existing facts.
+
+      2. CruleDatabase updates the FactDatabase and the event queue
+         when events unify with a causal rule.
+
+     These data types allow you to perform projection and persistance
+     clipping on the temporal database, and to make queries. Here's how.
+
+     1. Set up the initial elements in
+        - a Queue of effects
+        - a FactDatabase
+        - a Queue of events.
+        This was described above.
+
+     2. Take the first event from the queue repeatedly, until the queue is
+        empty. You will see each event is the order they occur.
+
+     3. Try to unify the event with each causal rule, using the standard
+        lexical rules for unification. Each Crule knows how to unify itself
+        with an event. The crule internal nodes compare the event's symbol
+        with the Crule's trigger. It then asks the FactDatabase to verify
+        each antecedent of the causal rule. If each antecedent is valid,
+        then each effect is applied by adding it to either the FactDatabase
+        or event Queue, as appropriate.
+
+------------------------------------------------------------------------
+  OBJECTS USED:
+Effect : base class for Fact, and Event
+  has a start_time_, and a symbol_
+Fact : Derived class that 
+  has a end_time_ and a negation flag
+Event : Derived class that adds nothing to Effect
+
+Crule : implementation of a causal rule
+
+FactDatabase (include FactInternalNode, FactTailNode, FactHeadNode)
+handles aggregate operations on all facts.
+
+CruleDatabase( includes CruleInternalNode, CruleTailNode,
+CruleHeadNode) handles aggregate operation on all rules. This include
+updating the FactDatabse, and the event queue.
+
+NOTES: 
+The algorithm calls for unification. However, we only implement
+lexical equality. Consequently, variables are not handled by this
+code. Adding variables is an exercise in the text book.
+
+
+

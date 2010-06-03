@@ -1,0 +1,118 @@
+                         Natural Language Parser
+
+This is the C++ implementation of the program found in the appendix of
+chapter 10, Natural Language. It is an implemenation of a natural
+language parser using a context-free grammar and depth first search
+through a state space. This code was written by Kostadis Roussos,
+knr@cs.brown.edu.
+
+HOW DO I COMPILE IT?
+
+  1. Edit the Makefile to change the variables SUPPORT and CC if needed.
+  2. You should have the following files in this directory:
+	Grammar.C
+	KRUtility.C
+	XDString.C
+	Lexicon.C
+	Lexicon.H
+	State.C
+	Variable.C
+	Variable.H
+	Word.C
+	Word.H
+	langTest.C
+	dfs.C
+
+  3. Type "make" at the command line.
+  4. Type at the command line:
+
+     parse the dog saw the pizza
+
+     which will give this output:
+
+ ( Sentence ( Noun phrase (Word  the )  (type article ) ( root the ) (case 3s )
+(Word  dog )  (type noun ) ( root dog ) (case 3s )
+ ) ( Verb Phrase (Word  saw )  (type verb ) ( root see ) (case x )
+( Noun phrase (Word  the )  (type article ) ( root the ) (case 3s )
+(Word  pizza )  (type noun ) ( root pizza ) (case 3s )
+
+------------------------------------------------------------------------
+HOW DO I USE IT?
+
+Unlike the other programs, you will not have to recompile the source code
+to change the input data. Simply type at the command line the sentence
+that you want to interpret, for example:
+
+You can only use a few words in your sentences:
+
+    the, dog, saw, barks, the, pizza.
+
+For more details see either the code or look at the textbook.
+
+----------------------------------------------------------------------
+HOW DOES IT WORK, REALLY?
+
+   A parser can be implemented in a number of ways. In the book,
+   parsing is a search in state space. This search is implemented as a
+   depth-first search. The rewriting rules are provided by the Grammar
+   and the Lexicon which also manage the issues of feature matching.
+
+   Unfortunately, C++ does not provide the clean symbol manipulation that
+   Lisp provides. Furthermore, there is a more intuitive object-oriented
+   model for parsing. Instead of making the states passive place holders,
+   the states can know how to make the next state. The arc object in the
+   Lisp code is not needed, since each state knows which objects it makes
+   transitions to.
+
+   Features are variables that are common through the entire sentence.
+   There is a case variable that the noun phrase, sentence, verb phrase,
+   and the verb has. In the text, that variable is bound and then replaced.
+   Here each state has a pointer to the case variables, so they are
+   directly accessible without the searching that the Lisp code performs.
+
+   The C++ program:
+      - puts all the words in a stack
+      - creates the common variable for all the sentences
+      - sets up the Lexicon
+      - passes the Lexicon to the initial state, the Sentence
+      - calls dfs() with that state
+      - dfs() asks the sentence to make a transition
+      - the Sentence returns first a NounPhrase
+      - the NounPhrase is asked to makeTransition(), returning the appropriate
+        objects.
+
+   The depth first search stops when no more transitions can be made.
+   A sentence is parsed if the stack is empty, meaning that there are
+   no more words to be parsed.
+
+   The parsed sentence is displayed calling Sentence::display().
+
+   All of the setup for parsing is done in langTest.C, which:
+      - puts the words on the stack
+      - creates the Lexicon
+      - creates the variable for the sentence
+      - calls dfs with the sentence object
+      - prints the result of the dfs.
+------------------------------------------------------------------------
+OBJECTS USED:
+
+State : Sentence, NounPhrase, VerbPhrase, Article, Noun, Verb.  The
+depth first search asks each state for all reachable states, Instead
+of having an arbitrary state object, we model each possible state
+explicitly at compile time.
+
+Lexicon : the lexicon occupies the same functionality as the one in
+the Lisp. It consists of words and their properties, and each state
+makes queries to it about particular words.
+
+Variable : the variable object manages the issues of binding and matching.
+
+Word : the word object is a structure that contains all the features
+of an object.
+
+NOTES:
+
+There is no arc object since the arcs are no longer relevant. An
+object explicitly is made aware of what objects lead from it.
+
+

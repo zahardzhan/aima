@@ -1,0 +1,10 @@
+nodes 3 H B L
+
+distribution H 0.7 0.3
+
+distribution B 0.2 0.8
+
+parents L 2 H B
+distribution L 0.2 0.8 0.3 0.7 0.1 0.9 0.8 0.2
+
+evidence H 0

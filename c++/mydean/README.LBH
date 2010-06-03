@@ -1,0 +1,210 @@
+Compiling Dean's C++ Code under GNU g++ 2.6.3:
+(also some cleanup and extension as noted)
+==============================================
+
+C++Support:
+-----------
+
+1. Moved all copies of KRUtility.[C|H] and XDString.[C|H]
+   from other directories into the C++Support directory.  Created a
+   Makefile in C++Support to build KRUtility.o and XDString.o.
+   Modified other Makefiles to get these .o files from C++Support.
+
+2. In XDString.C, removed "int" return type specification from
+   "int XDString::operator int()" function definition.
+
+3. In SLBag.H, added "#include <SLBagIterator.H>" and in
+   SLBag<T,K>::operator=(SLBag<T,K>& Bag), changed the line
+   "comparator_ = new K(*(Bag->comparator_));" to
+   "comparator_ = new K(*(Bag.comparator_));".
+
+4. In List.H, in ListAbsHeadNode::ListAbsHeadNode(ListAbsHeadNode& node)
+   and in ListAbsHeadNode::operator=(ListAbsHeadNode& node), changed
+   "new ListAbsTailNode" to "new ListAbsTailNode<T,K>" and changed
+
+     next_ = new ListAbsInternalNode(*(node.getNext()));
+
+   to
+
+     next_ = new ListAbsInternalNode<T,K>
+                   (*((ListAbsInternalNode<T,K> *) node.getNext()));
+
+5. In List.H, in ListAbsInternalNode::ListAbsInternalNode(
+   ListAbsInternalNode& node) and in ListAbsInternalNode::operator=(
+   ListAbsInternalNode& node), changed
+
+     ListAbsTailNode* tail_node = new ListAbsTailNode;
+
+   to
+
+     ListAbsTailNode<T,K>* tail_node = new ListAbsTailNode<T,K>;
+
+   and changed
+
+     next_ = new ListAbsInternalNode(*node.getNext());
+
+   to
+
+     next_ = new ListAbsInternalNode
+                  (*((ListAbsInternalNode *) node.getNext()));
+
+6. In List.H, changed "insert" and "remove" functions
+   of ListAbsNode from pure virtual "= 0;" to empty "{}".
+
+7. In SortedList.H, in SortedList<T,K>::operator=(SortedList<T,K>& list),
+   changed line "ListAbsNode<T,K>* node = list->head_->getNext();" to
+   "ListAbsNode<T,K>* node = list.head_->getNext();" and changed line
+   "while(node_->getNext() != 0)" to "while(node->getNext() != 0)".
+
+8. In Queue.H, in Queue<T,K>::operator=(Queue<T,K>& queue) changed line
+   "ListAbsNode<T,K>* node = queue->head_->getNext();" to
+   "ListAbsNode<T,K>* node = queue.head_->getNext();".  Also changed line
+   "while(node_->getNext() != 0) { // while not the tail node!" to
+   "while(node->getNext() != 0) { // while not the tail node!".
+
+9. In SortedQueue.H and SortedList.H, included SIterator.H.
+
+
+03.Logic/C++Code/DataDependencies:
+----------------------------------
+
+1. In Makefile, set CC = g++.
+
+2. Generated "segmentation fault" when run. (**** TODO ****)
+
+03.Logic/C++Code/Unification:
+-----------------------------
+
+1. In Makefile, set CC = g++.  Changed access to KRUtility.o and
+   XDString.o from C++Support directory.
+
+2. Moved the definitions of BindCompare and LogicComparator to the new
+   file Compare.H, each prefaced by a forward declaration of the class
+   type appearing in the argument list of the member functions.  Included
+   Compare.H as the first include file of each of the .H files previously
+   containing the Compare/Comparator definitions, and removed any forward
+   references in these files.
+
+3. Changed Parse.C so that right parentheses can appear without preceding
+   space.  This required adding a second condition to the while loop to
+   read in a constant that tests for (string[current_pos] != ')').
+
+
+04.Search/C++Code/Discrimination:
+---------------------------------
+
+1. In Makefile, set CC = g++.
+
+04.Search/C++Code/Genetic:
+--------------------------
+
+1. In Makefile, set CC = g++.
+
+2. Changed two occurrences of 'NULL' to '0' in Chromosome.C.
+
+04.Search/C++Code/Search:
+-------------------------
+
+No changes.
+
+
+05.Learning/C++Code/Decision:
+-----------------------------
+
+1. In Makefile, set CC = g++.
+
+2. Made several changes to the files inorder to prevent the same
+   attribute from being using multiple times down one path in the tree.
+
+05.Learning/C++Code/PDP:
+------------------------
+
+No changes necessary.
+
+05.Learning/C++Code/Perceptron:
+-------------------------------
+
+1. In Makefile, set CC = g++.
+
+05.Learning/C++Code/Version:
+----------------------------
+
+1. In Makefile, set CC = g++.
+
+
+06.Advanced/C++Code/Temporal:
+-----------------------------
+1. In Makefile, set CC = g++.  Changed access to KRUtility.o and
+   XDString.o from C++Support directory.
+
+2. Moved the definitions of EffectCompare, EventCompare, FactCompare and
+   CruleComp to the new file Compare.H, each prefaced by a forward
+   declaration of the class type appearing in the argument list of the
+   member functions.  Included Compare.H as the first include file of each
+   of the .H files previously containing the Compare definitions, and
+   removed any forward Comp references in other files.
+
+3. Moved definition of FactCompare::display from Compare.H to Effects.C.
+
+
+07.Planning/C++Code/RefinePlans:
+--------------------------------
+
+1. In Makefile, set CC = g++.  Changed access to KRUtility.o and
+   XDString.o from C++Support directory.
+
+2. In Conflict.H, "friend ConflictComp" changed to
+   "friend class ConflictComp".
+
+3. Moved the definitions of PlanComp, StepComp, ConstComp, LinkComp,
+   OperatorComp, ReqComp and ConflictComp to the new file Compare.H, each
+   prefaced by a forward declaration of the class type appearing in the
+   argument list of the member functions.  Included Compare.H as the first
+   include file of each of the .H files previously containing the Comp
+   definitions, and removed any forward Comp references in these files.
+
+07.Planning/C++Code/StateSpaceSearch:
+-------------------------------------
+
+1. In Makefile, set CC = g++.  Changed access to KRUtility.o and
+   XDString.o from C++Support directory.
+
+2. In PlanningState.H, "friend Heuristic" changed to
+   "friend class Heuristic".
+
+3. Moved the definitions of OperatorComp and PlanningCompare
+   to the new file Compare.H, each prefaced by a forward declaration
+   of the class type appearing in the argument list of the member functions.
+   Included Compare.H as the first include file of each of the .H files
+   previously containing the Comp definitions, and removed any forward Comp
+   references in these files.
+
+3. Moved definition of PlanningCompare::display from Compare.H to
+   PlanningState.C.
+
+
+08.Uncertainty/C++Code/Uncertainty:
+-----------------------------------
+
+1. In Makefile, set CC = g++.
+
+
+09.Vision/C++Code/Waltz:
+------------------------
+
+1. In Makefile, set CC = g++.
+
+
+10.Language/C++Code/Parser:
+---------------------------
+
+1. In Makefile, set CC = g++.  Changed access to KRUtility.o and
+   XDString.o from C++Support directory.
+
+2. Moved the definition of WordSearch to the new file Compare.H, prefaced
+   by a forward declaration of the class type appearing in the argument
+   list of the member functions.  Included Compare.H as the first include
+   file of each of the .H files previously containing or referring to the
+   WordSearch definition, and removed any forward Word and WordSearch
+   references.
+

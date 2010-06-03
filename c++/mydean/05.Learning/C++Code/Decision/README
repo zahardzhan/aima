@@ -1,0 +1,104 @@
+				    Decision Tree Program
+
+
+Welcome to the wonderful world of the Decision Tree C++
+directory. This program demonstrates building a decision tree given a
+number of examples with classifications. It is meant to be a companion
+to chapter 5 of the "Artificial Intelligence" textbook.  This
+code was written by Jon Monsarrat, jgm@cs.brown.edu.
+
+Five sections describe the program:
+
+1. The problem
+2. Building the program
+3. Making example files
+4. Running the program
+5. The solution, and how to read the source code
+
+----------------------------------------------------------------------
+1. The problem
+
+The book goes into quite some detail about the problem, but here it is
+in a nutshell.
+
+We have some dimensions and some classes. We are given a number of
+examples, each of which has a class and a value for each dimension. We
+build a decision tree. Each node in the decision tree is either a
+terminal node or a non-terminal node. Terminal nodes are associated
+with examples. Non-terminal nodes are associated with attributes which
+you could consider to be "questions". When the decision tree is built,
+a walk from the root down down, answering "questions", will bring you
+to the node with the classification you want.
+----------------------------------------------------------------------
+2. Building the program
+
+The source code in this directory is complete and does not depend upon
+any other source code from the textbook. It only uses standard
+and libraries which should come any C++ compiler.
+
+You can build this program in UNIX by simply typing
+
+      make
+
+You may need to edit the Makefile to change the name of the compiler,
+if you do not have a compiler named "CC".
+
+You do not need to recompile the program to change examples. Examples
+are stored in files.
+----------------------------------------------------------------------
+3. Making example files and running the program
+
+An example file specifies the classes, the dimensions (the attributes
+and their possible values) and all the examples. It is laid out in
+this order:
+   1. the word "classes", followed by the number of classes and their names
+   2. the word "dimensions", followed by the number of dimensions
+   3. Each dimension in order, which includes
+      a. the name of the attribute
+      b. the number of values
+      c. the names of all the values
+   4. the word "examples", followed by each example, which includes
+      a. The name of this example
+      b. The classifications of the example
+      c. All the values of the example, in the same ordering as the dimensions
+
+----------------------------------------------------------------------
+4. Running the program
+
+Running the program is very simple. Just type
+
+   decision filename
+
+where "filename" is the name of the example file you want to read in.
+----------------------------------------------------------------------
+5. The solution, and how to read the source code
+
+Because the complexity of this program lies in the data structures and
+loops, this program does not match the Lisp program entirely. However,
+most of the function names are the same.
+
+The classes are:
+
+   Decision    -- The entire decision tree is stored here
+   Dimension   -- A single dimension (with attributes and possible values)
+   Example     -- A single example (with classification and values)
+   Node        -- A node in decision tree (a splitting attribute and children)
+
+A single root node is created and the examples are all read into
+the root node. Then each dimension is tested with a metric "evaluate"
+that determines the disorder of the tree. The root node is split on
+the dimension with the lowest metric. This splitting continues recursively
+on all the root node's children until all nodes in the decision tree
+are either non-terminals with a splitting attribute, or are terminals
+with a set of examples.
+
+There are 4 source files in this directory:
+
+   Decision.C   Contains the decision tree and the class/dimension info
+   Dimension.C  Contains the Dimension class
+   Example.C    Contains the Example class
+   Node.C       Contains the Node class
+   String.C     A generic strings library, a copy of the UNIX standard
+
+Start in Decision.C with the main() function if you want to read the code.
+----------------------------------------------------------------------

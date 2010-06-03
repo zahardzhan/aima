@@ -1,0 +1,9 @@
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\TicTacToeSample\bin\Debug\TicTacToeSample.exe
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\TicTacToeSample\bin\Debug\TicTacToeSample.pdb
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\TicTacToeSample\bin\Debug\aima.dll
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\TicTacToeSample\bin\Debug\aima.pdb
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\TicTacToeSample\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\TicTacToeSample\obj\Debug\TicTacToeSample.Form1.resources
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\TicTacToeSample\obj\Debug\TicTacToeSample.csproj.GenerateResource.Cache
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\TicTacToeSample\obj\Debug\TicTacToeSample.exe
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\TicTacToeSample\obj\Debug\TicTacToeSample.pdb

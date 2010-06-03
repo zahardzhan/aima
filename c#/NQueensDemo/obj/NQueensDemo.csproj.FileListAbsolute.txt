@@ -1,0 +1,9 @@
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\NQueensDemo\bin\Debug\NQueensDemo.exe
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\NQueensDemo\bin\Debug\NQueensDemo.pdb
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\NQueensDemo\bin\Debug\aima.dll
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\NQueensDemo\bin\Debug\aima.pdb
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\NQueensDemo\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\NQueensDemo\obj\Debug\NQueensDemo.Form1.resources
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\NQueensDemo\obj\Debug\NQueensDemo.csproj.GenerateResource.Cache
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\NQueensDemo\obj\Debug\NQueensDemo.exe
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\NQueensDemo\obj\Debug\NQueensDemo.pdb

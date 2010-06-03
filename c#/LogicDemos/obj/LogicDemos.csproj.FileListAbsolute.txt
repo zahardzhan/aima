@@ -1,0 +1,9 @@
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\LogicDemos\obj\Debug\LogicDemos.exe
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\LogicDemos\obj\Debug\LogicDemos.pdb
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\LogicDemos\bin\Debug\LogicDemos.exe
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\LogicDemos\bin\Debug\LogicDemos.pdb
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\LogicDemos\bin\Debug\aima.dll
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\LogicDemos\bin\Debug\aima.pdb
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\LogicDemos\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\LogicDemos\obj\Debug\LogicDemos.Form1.resources
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\LogicDemos\obj\Debug\LogicDemos.csproj.GenerateResource.Cache

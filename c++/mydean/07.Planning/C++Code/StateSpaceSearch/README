@@ -1,0 +1,112 @@
+                      State Space Search for Planning
+
+This is an implementation of State Space Search and MEA search found
+in chapter 7 of the text book. This code was written by Kostadis
+Roussos, knr@cs.brown.edu.
+
+HOW DO I COMPILE IT?
+
+  1. Edit the Makefile to change the variables SUPPORT and CC if needed.
+  2. You should have the following files in this directory:
+
+     PlanningState.C
+     PlanningState.H
+     Operator.H
+     Operator.C
+     Heuristic.C
+     Heuristic.H
+     State.C
+     best.C
+     bfs.C
+     StateSearches.H
+     StateSearches.H
+     testSSS.C
+     XDString.C
+     KRUtility.C
+
+
+  3. Type "make" at the command line.
+  4. Run the program "sss" and it should say
+  
+     assembled 3 assembled 1 assembled 2 
+
+------------------------------------------------------------------------
+HOW DO I USE IT?
+
+  Given an initial state, and a goal state, this program searches through
+  the state space of possible plans, to find a path.
+
+  A bag is a set where some elements can be duplicated.
+
+  1. First, you will need to create the operators that allow transitions
+     from one state to another. To create an operator:
+
+      a) Define three bags for the additions, deletions and preconditions of
+         the operators, like this:
+	
+         SLBag<XDString,StringComp>* additions, *deletions, *preconditions;
+         additions = new SLBag<XDString,StringComp>;
+         deletions = new SLBag<XDString,StringComp>;
+         preconditions = new SLBag<XDString,StringComp>;
+
+      b) Set the symbols corresponding to additions, deletions, and
+         preconditions, by inserting them into the bags:
+
+         additions->addMember(new XDString("on c a"));
+  
+      c) For each operator, once you have specified its additions,
+         deletions, and preconditions, you can create it like this:
+	
+         Operator* one = new Operator(additions,preconditions,deletions);
+
+  2. Create bags for the initial and final state and set their symbols.
+
+     symbols->addMember(new XDString("not assembled 1"));
+     symbols->addMember(new XDString("not assembled 2"));
+     symbols->addMember(new XDString("not assembled 3"));
+
+  3. Create the initial and final states, with their symbols and the operators.
+ 
+     PlanningState* goal = new PlanningState(ops, symbols); 
+
+  4. The sample code in testSS.C is currently configured to perform a
+     state space search with the sss() function:
+
+        PlanningState* result = sss(initial, goal);
+
+     However, you can configure it to perform an MEA search instead,
+     using a heuristic to guide search.
+
+ 	Heuristic* heuristic = new Heuristic(goal);
+	PlanningState* result = mea(initial, goal, heuristic);
+	
+  5. You can print the result of the search by creating a PlanningCompare
+     object:
+
+     PlanningCompare displayer;
+     displayer.display(result);
+
+------------------------------------------------------------------------
+HOW DOES IT WORK, REALLY?
+
+  This C++ implementation is similar to the Lisp implementation.  However, states in the Lisp code are acted on by outside functions.
+  In C++, states act on themselves with methods.
+
+  The PlanningState class derives from the State class. It creates the
+  next states by calling applyOperators(), which
+    - creates all the next plans
+    - puts them on a queue
+
+  The PlanningState returns each one of these plans whenever makeTransition()
+  is called. 
+
+  The Heuristic class implements the heuristic used in a best first
+  search. When you create a Heuristic, you must supply the goal state.
+  Heuristics are only used with the MEA search.
+
+OBJECTS USED:
+
+Heuristic : a comparator for PlanningState
+Operator : the operator class
+PlanningState : the plan states described in the text
+

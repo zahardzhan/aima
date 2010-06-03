@@ -1,0 +1,108 @@
+				    Version Space Program
+
+
+Welcome to the wonderful world of the Version Space C++
+directory. This program demonstrates refining boundaries in a version
+space given a bunch of examples. It is meant to be a companion
+to chapter 5 of the "Artificial Intelligence" textbook.  This
+code was written by Jon Monsarrat, jgm@cs.brown.edu.
+
+Five sections describe the program:
+
+1. The problem
+2. Building the program
+3. Making example files
+4. Running the program
+5. The solution, and how to read the source code
+
+----------------------------------------------------------------------
+1. The problem
+
+The book goes into quite some detail about the problem, but here it is
+in a nutshell.
+
+We are given a version space consisting of two classes "yes" and "no".
+We are given several dimensions, each with an attribute and possible
+values.  We have several examples, each with values for all dimensions
+and classifications.
+
+We would like to know if a simple conjunction could classify examples.
+This program finds this out by creating boundaries and refining them.
+It's a little complex.
+----------------------------------------------------------------------
+2. Building the program
+
+The source code in this directory is complete and does not depend upon
+any other source code from the textbook. It only uses standard
+and libraries which should come any C++ compiler.
+
+You can build this program in UNIX by simply typing
+
+      make
+
+You may need to edit the Makefile to change the name of the compiler,
+if you do not have a compiler named "CC".
+
+You do not need to recompile the program to change examples. Examples
+are stored in files.
+----------------------------------------------------------------------
+3. Making example files and running the program
+
+An example file specifies the dimensions (the attributes
+and their possible values) and all the examples. It is laid out in
+this order:
+   1. the word "dimensions", followed by the number of dimensions
+   2. Each dimension in order, which includes
+      a. the name of the attribute
+      b. the number of values
+      c. the names of all the values
+   3. the word "examples", followed by each example, which includes
+      a. The name of this example
+      b. The classifications of the example
+      c. All the values of the example, in the same ordering as the dimensions
+
+The example files for the version space algorithm are similar to the
+example files for the decision tree algorithm. However, for the
+version space algorithm we assume that there are only two classes,
+"yes" and "no". You do not define the classes in the example file.
+
+----------------------------------------------------------------------
+4. Running the program
+
+Running the program is very simple. Just type
+
+   version filename
+
+where "filename" is the name of the example file you want to read in.
+----------------------------------------------------------------------
+5. The solution, and how to read the source code
+
+The C++ program does a reasonable job of matching the Lisp program.
+However, you are more likely to understand what is going on by reading
+the description of the algorithm in English in section 5.3.
+
+Most of the function names are the same as in the Lisp code.
+
+The classes are:
+
+   Version     -- Read the example file, and run the version space algorithm
+   Boundary    -- Either the general or the specific boundary
+   Concept     -- A single concept, which is a conjunction of values
+   Example     -- An example, which contains values and a class
+   Dimension   -- A dimension, which is an attribute and possible values
+
+The dimensions and examples are read in from a file, and the initial
+values for the general and specific boundaries are set up. Then
+for each example, both boundaries are refined.
+
+There are 6 source files in this directory:
+
+   Version.C    The Version class and the main() function
+   Boundary.C   The Boundary class
+   Concept.C    The Concept class
+   Dimension.C  The Dimension class
+   Example.C    The Example class
+   String.C     A generic strings library, a copy of the UNIX standard
+
+Start in Decision.C with the main() function if you want to read the code.
+----------------------------------------------------------------------

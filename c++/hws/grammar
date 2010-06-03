@@ -1,0 +1,72 @@
+% ------------------------- HW5 Problem 1 --------------------------
+
+% Wumpus grammar with semantics
+
+s(Meaning) --> np(Something), vp(Something,Meaning).
+
+np(Something) --> article, noun(Something) | noun(Something).
+
+vp(Something,PP) --> linkverb, pp(Something,PP).
+
+pp(Something,PP) --> prep(Something,Somewhere,PP), np(Somewhere).
+
+pp(Somewhere) --> prep, np(Somewhere).
+
+article --> [the].
+
+noun(wumpus) --> [wumpus].
+noun([X,Y]) --> digit(X), digit(Y).
+
+linkverb --> [is].
+
+prep(Something,[X,Y],at(Something,X,Y)) --> [in].
+
+digit(1) --> [1].
+digit(2) --> [2].
+digit(3) --> [3].
+digit(4) --> [4].
+digit(5) --> [5].
+digit(6) --> [6].
+digit(7) --> [7].
+digit(8) --> [8].
+digit(9) --> [9].
+
+
+%---------- Testing ----------
+
+% meaning(S,M): M is the semantic meaning of the string S (a list
+%   of ascii characters representing space-separated words) according
+%   to the DCG grammar s(Meaning) below.  For example,
+%     meaning("the wumpus is in 1 3",M)
+
+meaning(S,M) :-
+  string_to_atoms(S,A),
+  s(M,A,[]).
+
+
+% string_to_atoms(String,Atoms): Converts a list of ascii codes String
+%   into a list of Atoms.
+
+string_to_atoms([],[]).
+
+string_to_atoms([32|Rest],Atoms) :-  % 32 = 'space' in ascii
+  string_to_atoms(Rest,Atoms).
+
+string_to_atoms([Char|Rest],[Atom|Atoms]) :-
+  Char =\= 32,
+  extract_atom_string([Char|Rest],AtomString,RestString),
+  name(Atom,AtomString),
+  string_to_atoms(RestString,Atoms).
+
+
+% extract_atom_string(String,AtomString,RestString): AtomString is
+%   the list of ascii codes in String up to the first space, and
+%   RestString is the remaining list of ascii codes in String.
+
+extract_atom_string([],[],[]).
+
+extract_atom_string([32|Rest],[],Rest).
+
+extract_atom_string([Char|Rest],[Char|RestAtom],RestString) :-
+  Char =\= 32,
+  extract_atom_string(Rest,RestAtom,RestString).

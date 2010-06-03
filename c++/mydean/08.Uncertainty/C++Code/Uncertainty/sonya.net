@@ -1,0 +1,11 @@
+nodes 3 O C L
+
+distribution O 0.6 0.4
+
+parents C 1 O
+distribution C 0.7 0.3 0.2 0.8
+
+parents L 1 O
+distribution L 0.9 0.1 0.4 0.6
+
+evidence L 1

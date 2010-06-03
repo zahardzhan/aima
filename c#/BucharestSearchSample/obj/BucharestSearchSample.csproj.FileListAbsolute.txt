@@ -1,0 +1,9 @@
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\BucharestSearchSample\bin\Debug\BucharestSearchSample.exe
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\BucharestSearchSample\bin\Debug\BucharestSearchSample.pdb
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\BucharestSearchSample\bin\Debug\aima.dll
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\BucharestSearchSample\bin\Debug\aima.pdb
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\BucharestSearchSample\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\BucharestSearchSample\obj\Debug\BucharestSearchSample.Form1.resources
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\BucharestSearchSample\obj\Debug\BucharestSearchSample.csproj.GenerateResource.Cache
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\BucharestSearchSample\obj\Debug\BucharestSearchSample.exe
+C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\BucharestSearchSample\obj\Debug\BucharestSearchSample.pdb

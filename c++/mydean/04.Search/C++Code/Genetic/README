@@ -1,0 +1,86 @@
+				  Genetic Algorithm Program
+
+Welcome to the wonderful world of the Genetic Algorithm C++ directory.
+This program demonstrates having a population of individuals, each of
+whom is given a fitness value. The entire population evolves through
+mutation and crossover to maximize the fitness function.  The program
+is meant to be a companion to chapter 4 of the "Artificial
+Intelligence" textbook. This code was written by Jon Monsarrat,
+jgm@cs.brown.edu.
+
+Five sections describe the program:
+
+1. The problem
+2. Building the program
+3. Running the program
+4. The solution, and how to read the source code
+
+----------------------------------------------------------------------
+1. The problem
+
+The book goes into quite some detail about the problem, but here it is
+in a nutshell.
+
+We want to maximize some fitness function that applies to a bunch of
+boolean values. This bunch we call a chromosome, and each boolean
+value is an allele. Given a population of randomly generated
+chromosomes, we want to evolve a new generation out of the fittest of
+the current population.
+
+----------------------------------------------------------------------
+2. Building the program
+
+The source code in this directory is complete and does not depend upon
+any other source code from the textbook. It only uses standard
+and libraries which should come any C++ compiler.
+
+You can build this program in UNIX by simply typing
+
+      make
+
+You may need to edit the Makefile to change the name of the compiler,
+if you do not have a compiler named "CC".
+
+You will need to recompile the program if you want to add your own
+fitness measuring functions. The program comes with two example
+functions so you can so try it out.
+
+----------------------------------------------------------------------
+3. Running the program
+
+Running the program is very simple. Just type
+
+   genetic -single
+
+to try to maximize the single_func() function for 10 generations of evolution.
+More generally, you can type
+
+   genetic <-multiple> <-single> <-a num> <-i num> <-g num>
+
+     -multiple   Evolve to maximize the multiple function
+     -single     Evolve to maximize the single function
+     -a num      Use num many alleles in each individual
+     -i num      Use num many individuals in the population
+     -g num      Use num many generations of evolution
+
+
+There is no example filename. Because the fitness functions are C++
+functions, you will have to recompile the prorgam to use your own
+fitness function.
+----------------------------------------------------------------------
+4. The solution, and how to read the source code
+
+This solution is quite close to the Lisp version given in the textbook.
+
+The classes are:
+
+   Population -- Holds the entire population of chromosomes.
+   Chromosome -- Holds a single chromosome, with its alleles.
+
+There are 2 source files in this directory:
+
+   Population.C  The Population class and the main() function
+   Chromosome.C  The Chromosome class
+
+----------------------------------------------------------------------
+

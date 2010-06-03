@@ -1,0 +1,108 @@
+                     Data Dependency Graph Program
+
+This program implements the data dependency graphs described in the
+appendix for chapter 3 of the book. You can use this program to create
+and modify data dependency graphs, and also perform simple queries on the data.
+Specifically, you can ask whether a fact holds at a particular time. This
+code was written by Kostadis Roussos, knr@cs.brown.edu.
+
+HOW DO I COMPILE IT?
+
+  1. Edit the Makefile to change the variables SUPPORT and CC if needed.
+  2. You should have the following files in this directory:
+     DataList.H
+     DataNode.C
+     DataNode.H
+     dataTest.C
+     main.H
+  3. Type "make" at the command line.
+  4. Run the program "appendix". It should say "it worked".
+
+----------------------------------------------------------------------
+HOW DO I USE IT?
+
+  This program lets you create and modify data dependency graphs. 
+  A sample version can be found in dataTest.C. If you to use this to make
+  your own program, you would modify dataTest.C.
+
+  Unfortunately we did not write a parser that could get arbitrary input
+  from a text file or the command line. Thus, everytime you want to change
+  the results, you will have to recompile the entire program. 
+
+  1. If you are going to perform queries on data, then you need a variable
+     to hold the answer to the query. You can create a variable to hold
+     the result of a query, by creating a variable of type "DataNode::State"
+     like this:
+
+ 	 DataNode::State test1_result;
+
+  2. A data nodes is a symbol in the data dependency graph. A data node has
+     a symbol that can be any string. You can create a data node like this:
+
+	 DataNode* D1 = new DataNode("D1");
+
+  3. If you want to add a justification to your data nodes, you must
+     call the "addJustification()" method. This call says that the data node
+     D3 depends on the data node D1.
+
+         D3->addJustification(D1);
+
+  4. Some justifications are the empty list, which in lisp and this program
+     is meaningful. To simulate the empty list, there exists a predefined
+     global G_empty that can be used as a justification.
+
+         D1->addJustification(G_empty);
+
+  5. To make a query on the state of a data node, you call the "state()"
+     method, which returns whether a node is IN or OUT.
+
+	 test1_result = D3->state();
+
+  6. You can remove a justification from a node with the method
+     "removeJustification()". For example, the below call removes the
+     G_empty justification from the node D1.
+
+	 D1->removeJustification(G_empty);
+
+----------------------------------------------------------------------
+HOW DOES IT WORK, REALLY?
+
+  The algorithm is detailed in the text book, but there are some
+  differences between the text book code and this code.
+
+  Rather than have a series of functions that perform operations on the
+  graph, the nodes of the graph are modeled by an object (DataNode)
+  which has links to its justifications and justificands. It is the duty
+  of the DataNode to pass the message that the graph needs to be updated
+  whenever a justification is added or removed.
+
+  Update takes place by first visiting all the reachable nodes. That is
+  implemented by having the current node pass a message to the
+  justificands. Each justificand in turn (if it is not already
+  visited) becomes visited and then passes the message to its
+  justificands. When update is finished the nodes are revised.
+
+  The nodes are revised if the state of the justifications and the
+  Node is different. Again the justifications are passed the update
+  message, which then informs the initial node what the states of the
+  justifications are. If the intial node has a different state then it
+  passes the revised message to its justificands. When the revision is
+  finished the graph is completely updated.
+
+----------------------------------------------------------------------
+OBJECTS USED:
+
+DataNode : A node in the data dependency graph. 
+
+DataInternalList, DataTailList, DataHeadList, SortedDataList : these
+  implement the necessary message passing to the aggregate list
+  structure of justifications and justificands. They inherit from
+  SInternalNode, SHeadNode, STailNode for the list properties and
+  DataNode for the Data dependency properties.
+
+NOTES:
+
+When comparing symbols, be exact. The symbols "D1 " and
+"D1" are different, but the symbols "D1" and "D1" are the same.
+
+

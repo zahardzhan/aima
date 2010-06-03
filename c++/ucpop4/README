@@ -1,0 +1,41 @@
+________________UCPOP Planner version 4.0 now available!________________
+
+Common Lisp source code for the UCPOP partial order planner, version 4.0,
+is now available via annonymous FTP.  UCPOP operates with actions that
+have conditional effects and universally quantified preconditions and
+effects.  It accepts universally quantified goals.  In addition, UCPOP 4.0
+allows domain axioms and predicates that call Common Lisp code to determine
+satisfiability.  With a conservative search strategy UCPOP is both sound
+and complete for this representation, but one can add aggressive,
+domain-dependent search control with convenient declarative rules. Our
+Common Lisp implementation is simple enough for classroom use, yet quite
+efficient (requiring between 2-20ms to explore and refine a partial
+plan). Version 4.0 offers the following improvements:
+
+* A slick graphical Plan DeBugger (requires CLIM 2.0)
+* Safety constraints
+* Quantification over dynamic universes (object creation and destruction) 
+* New search control strategies and improved search control languag
+* Improved user's manual and more domain theories for testing
+* Domain axioms
+* Predicates expanding to lisp code
+* Compared to version 2.0, version 4.0 is twice as fast at plan elaboration
+
+The planner is available via anonymous FTP via
+http://www.cs.washington.edu/research/projects/ai/www/ucpop.html
+
+________________
+
+One other thing.... I've recently written a tutorial paper (it appeared in
+AI Magazine, Winter 1994) called "An Introduction to Least Commitment
+Planning" for use in teaching with our planning software. The paper has
+lots of figures and examples and seems to go over very well with students.
+You can get it by browsing the UCPOP page above or my home page:
+
+    Daniel Weld, Associate Professor                   Office: (206) 543-9196 
+    Dept. of Computer Science and Engineering            Home: (206) 523-9058 
+    University of Washington                              Fax: (206) 543-2969
+    Box 352350                               Internet: weld@cs.washington.edu
+    Seattle, WA 98195-2350       Web: http://www.cs.washington.edu/homes/weld
+
+

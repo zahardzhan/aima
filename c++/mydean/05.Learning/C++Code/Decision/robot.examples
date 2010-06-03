@@ -1,0 +1,15 @@
+classes 2 yes no
+dimensions 4
+status 3 faculty staff student
+floor 3 three four five
+dept 2 cs ee
+size 3 large medium small
+examples
+307 no  faculty three ee large 
+309 no  staff   three ee small 
+408 yes faculty four  cs medium 
+415 yes student four  ee large 
+509 no  staff   five  cs medium 
+517 yes faculty five  cs large 
+316 yes student three ee small 
+420 no  staff   four  cs medium 

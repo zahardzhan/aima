@@ -1,0 +1,9 @@
+dimensions 3
+status 2 faculty staff
+floor 2 four five
+dept 2 cs ee
+examples
+412 yes faculty four cs
+509 no  staff   five cs
+517 yes faculty five cs
+507 no  faculty five ee

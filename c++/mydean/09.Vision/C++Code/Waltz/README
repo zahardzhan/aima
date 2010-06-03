@@ -1,0 +1,125 @@
+					   Vision Program
+
+Welcome to the wonderful world of the Vision C++ directory.  This
+program demonstrates the waltz filter. It is meant to be a companion
+to chapter 9 of the "Artificial Intelligence" textbook. This
+code was written by Jon Monsarrat, jgm@cs.brown.edu.
+
+Five sections describe the program:
+
+1. The problem
+2. Building the program
+3. Making example files
+4. Running the program
+5. The solution, and how to read the source code
+
+----------------------------------------------------------------------
+1. The problem
+
+The book goes into quite some detail about the problem, but here it is
+in a nutshell.
+
+We want to transform a visual diagram into a representation of objects.
+
+We assume the visual diagram has been transformed into a line drawing by
+edge-detection techniques. The program reads in a diagram that has
+been converted to a series of vertices and the edges that connect
+them. Each vertex is labeled a FORK, ARROW, TEE, or ELL. The vision
+program runs the waltz filter over the vertices to find the possible
+valid labelings for all vertics.
+
+The object representation is this possible valid labelings data.
+----------------------------------------------------------------------
+2. Building the program
+
+The source code in this directory is complete and does not depend upon
+any other source code from the textbook. It only uses standard
+and libraries which should come any C++ compiler.
+
+You can build this program in UNIX by simply typing
+
+      make
+
+You may need to edit the Makefile to change the name of the compiler,
+if you do not have a compiler named "CC".
+
+You do not need to recompile the program to change examples. Examples
+are stored in files.
+----------------------------------------------------------------------
+3. Making example files
+
+An example file specifies the vertices and all the connections between them.
+It is laid out is this order:
+   1. The number of vertices and their names:
+
+   2. For each node (in order):
+      a. the name of the node
+      b. the type of the node: FORK, ARROW, TEE, or ELL
+      c. the neighbors of this node, in order as appropriate to the type
+
+   3. Optionally, the word "ground" followed by two vertex names.
+      This will tell the program that the line between the vertices
+      is close to the ground.
+
+There are many example files in this directory:
+
+    arch1.diagram
+    arch2.diagram
+    arch3.diagram
+    cube-on-plate.diagram
+    cube.diagram
+    cube2.diagram
+    tower.diagram
+
+The cube2.diagram file is below, as an example:
+
+vertices 7 a b c d e f g
+a FORK b c d
+b ARROW g e a
+c ARROW e f a
+d ARROW f g a
+e ELL c b
+f ELL d c
+g ELL b d
+ground g d
+
+----------------------------------------------------------------------
+4. Running the program
+
+Running the program is very simple. Just type
+
+   waltz filename
+
+where "filename" is the name of the example file you want to read in.
+----------------------------------------------------------------------
+5. The solution, and how to read the source code
+
+This solution is reasonably close to the Lisp version given in the textbook.
+
+The classes are:
+
+   Diagram    -- Holds the entire diagram
+   Vertex     -- Represents one vertex in the network
+   Labeling   -- Represents one of the labelings for a vertex
+
+Each vertex type, FORK, ARROW, TEE, and ELL, has a set of possible
+labelings that are installed by the Vertex::possible_labelings()
+function.  The labels at neighboring vertices have to match up, and
+this will limit the labelings that are actually possible. This
+algorithm cycles through all the vertices over and over again,
+invalidating any labels which cannot possibly match up to any of the
+labels of the vertex's neighbors.
+
+Eventually, the program may say that no labelings are possible, or
+that one is (a unique solution), or that there are many possible
+labelings.
+
+There are 4 source files in this directory:
+
+   Diagram.C    The Diagram class
+   Vertex.C     The Vertex class
+   Labeling.C   The Labeling class
+   String.C     A generic strings library, a copy of the UNIX standard
+
+----------------------------------------------------------------------
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="aima">
+</Property><Property Name="Solution File" Value="C:\Users\Kris\Documents\Visual Studio 2005\Projects\aima_dotNET\aima.sln">
+</Property><Property Name="Date" Value="May-20-10">
+</Property><Property Name="Time" Value="4:38 AM">
+</Property></Properties><Event ErrorLevel="0" Project="aima" Source="aima.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="aima" Source="aima.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="SearchSamples" Source="SearchSamples\SearchSamples.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="SearchSamples" Source="SearchSamples\SearchSamples.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="ConstraintSample" Source="ConstraintSample\ConstraintSample.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="ConstraintSample" Source="ConstraintSample\ConstraintSample.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="TicTacToeSample" Source="TicTacToeSample\TicTacToeSample.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="TicTacToeSample" Source="TicTacToeSample\TicTacToeSample.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="BucharestSearchSample" Source="BucharestSearchSample\BucharestSearchSample.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="BucharestSearchSample" Source="BucharestSearchSample\BucharestSearchSample.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="HexapawnSample" Source="HexapawnSample\HexapawnSample.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="HexapawnSample" Source="HexapawnSample\HexapawnSample.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="JugsSearchSample" Source="JugsSearchSample\JugsSearchSample.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="JugsSearchSample" Source="JugsSearchSample\JugsSearchSample.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="LogicDemos" Source="LogicDemos\LogicDemos.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="LogicDemos" Source="LogicDemos\LogicDemos.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="NQueensDemo" Source="NQueensDemo\NQueensDemo.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="NQueensDemo" Source="NQueensDemo\NQueensDemo.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="EightPuzzleDemo" Source="EightPuzzleDemo\EightPuzzleDemo.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="EightPuzzleDemo" Source="EightPuzzleDemo\EightPuzzleDemo.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="aima.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="aima.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="aima" Source="aima.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="SearchSamples" Source="SearchSamples\SearchSamples.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="ConstraintSample" Source="ConstraintSample\ConstraintSample.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="TicTacToeSample" Source="TicTacToeSample\TicTacToeSample.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="BucharestSearchSample" Source="BucharestSearchSample\BucharestSearchSample.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="HexapawnSample" Source="HexapawnSample\HexapawnSample.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="JugsSearchSample" Source="JugsSearchSample\JugsSearchSample.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="LogicDemos" Source="LogicDemos\LogicDemos.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="NQueensDemo" Source="NQueensDemo\NQueensDemo.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="EightPuzzleDemo" Source="EightPuzzleDemo\EightPuzzleDemo.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

@@ -1,0 +1,24 @@
+				    C++ Support directory
+
+Welcome to the C++ Support directory! This directory contains
+source code that C++ programs in chapters 3, 6, 7, and 10 rely on.
+
+    Iterator.H      Iterates through a list
+
+    List.H          A base class for lists
+
+    Queue.H         A base class for queues
+
+    Searches.H      The header file for the searches defined in chapter 4.
+
+    SortedList.H    
+    SIterator.H     An iterator for sorted lists, as defined in SortedList.H
+
+    SLBag.H         A bag
+    SLBagIterator.H An iterator for the bag
+
+    SortedQueue.H   A sorted queue
+
+    SortedSet.H     A sorted set
+
+    Stack.H         A stack

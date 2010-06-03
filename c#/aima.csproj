@@ -1,0 +1,426 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AC141957-C37A-4D40-8107-8CF59C1A2982}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>aima</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>aima</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="basic\Agent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="basic\AgentProgram.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="basic\BasicEnvironmentView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="basic\Environment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="basic\EnvironmentObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="basic\ObjectWithDynamicAttributes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="basic\Percept.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="basic\Util.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="basic\Wall.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="basic\XYEnvironment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="basic\XYLocation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="datastructures\FIFOQueue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="datastructures\LIFOQueue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="datastructures\PriorityQueue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="games\AlphaBeta.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="games\Game.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="games\GameState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="games\TicTacToe.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="games\TicTacToeBoard.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="learning\framework\Attribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="learning\framework\AttributeSpecification.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="learning\framework\DataSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="learning\framework\DataSetFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="learning\framework\DataSetSpecification.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="learning\framework\Example.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="learning\framework\Learner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="learning\framework\NumericAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="learning\framework\NumericAttributeSpecification.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="learning\framework\StringAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="learning\framework\StringAttributeSpecification.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\common\Lexer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\common\LogicTokenTypes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\common\Parser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\common\ParseTreeNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\common\Token.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\common\Visitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\algorithms\KnowledgeBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\algorithms\Model.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\algorithms\PLFCEntails.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\algorithms\TTEntails.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\parsing\ast\AtomicSentence.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\parsing\ast\BinarySentence.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\parsing\ast\ComplexSentence.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\parsing\ast\FalseSentence.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\parsing\ast\MultiSentence.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\parsing\ast\Sentence.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\parsing\ast\Symbol.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\parsing\ast\TrueSentence.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\parsing\ast\UnarySentence.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\parsing\PELexer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\parsing\PEParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\parsing\PLVisitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\visitors\BasicTraverser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logic\propositional\visitors\SymbolCollector.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\csp\Assignment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\csp\Constraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\csp\CSP.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\csp\Domain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\csp\MapColoringConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\csp\MapCSP.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\eightpuzzle\EightPuzzleBoard.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\eightpuzzle\EightPuzzleGoalTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\eightpuzzle\EightPuzzleSuccessorFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\eightpuzzle\ManhattanHeuristicFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\eightpuzzle\MisplacedTileHeuristicFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\DefaultHeuristicFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\DefaultStepCostFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\GoalTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\GraphSearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\HeuristicFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\IState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\Measurable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\Metrics.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\Node.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\NodeExpander.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\NodeStore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\PrioritySearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\Problem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\QueueSearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\Search.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\SearchAgent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\SearchUtils.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\StepCostFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\Successor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\SuccessorFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\framework\TreeSearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\informed\AStarSearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\informed\GreedyBestFirstSearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\informed\HillClimbingSearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\informed\Scheduler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\informed\SimulatedAnnealingSearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\nodestore\FIFONodeStore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\nodestore\LIFONodeStore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\nodestore\PriorityNodeStore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\nqueens\NQueensBoard.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\nqueens\NQueensGoalTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\nqueens\NQueensSuccessorFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\nqueens\QueensToBePlacedHeuristic.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\uninformed\BreadthFirstSearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\uninformed\DepthFirstSearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\uninformed\DepthLimitedSearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="search\uninformed\IterativeDeepeningSearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="util\AbstractQueue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="util\Calculator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="util\Converter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="util\LogicUtils.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="util\Queue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="util\SetOps.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="util\Util.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,73 @@
+Supplement archive for "Artificial Intelligence: Theory and Practice"
+
+Welcome to the supplement directory for the textbook "Artificial
+Intelligence: Theory and Practice".  Here you will find sample code
+from the book, both in Lisp and C++. You will find lecture notes,
+exams, and assignments from classes taught with the textbook. We hope
+these materials might guide you in creating your own course.  Also,
+all the figures in the book are included, in case you would like to
+use them for slides. 
+
+----------------------------------------------------------------------
+Each chapter in the book has its own directory here.
+
+    01.Introduction/    Chapter 1 material
+    02.Symbolic/        Chapter 2 material
+    03.Logic/           Chapter 3 material
+    04.Search/          Chapter 4 material
+    05.Learning/        Chapter 5 material
+    06.Advanced/        Chapter 6 material
+    07.Planning/        Chapter 7 material
+    08.Uncertainty/     Chapter 8 material
+    09.Vision/          Chapter 9 material
+    10.Language/        Chapter 10 material
+    C++Support/         A general C++ Code library used for some C++ code
+    SchemeSupport/	Code for converting Common Lisp to Scheme
+    README              A README file describes the current directory
+
+----------------------------------------------------------------------
+Each chapter has its own subdirectories, typically:
+
+    C++Code/      C++ programs demonstrating algorithms in this chapter
+    LispCode/     Lisp programs demonstrating algorithms in this chapter
+
+The C++ directories contain source code for most essential algorithms
+in the book. However, the Lisp programs often have additional features
+or examples. The C++ and Lisp programs are written to match as nearly
+as possible. C++ coding was done by Kostadis Roussos, knr@cs.brown.edu
+and Jonathan Monsarrat, jgm@cs.brown.edu.
+
+To retrieve a Lisp program from a directory, you need only the Lisp
+files in the current directory. See the appropriate README file. Lisp
+directories usually have more than just one program. Most Lisp
+programs are small enough to fit in just one file.
+
+To retrieve a C++ program from a directory, you need all the files in
+that directory, including the "Makefile" which helps you compile the
+program. Some of the C++ directories rely on source code in the
+C++Support directory. See the appropriate README file.
+----------------------------------------------------------------------
+
+The files in the various directories have suffixes so you can tell
+what kind of information the files contain.
+
+  README     Describes the contents of a directory
+  Makefile   Helps you compile the source code in a C++ code directory
+  .C         C++ source file
+  .H         C++ source file
+
+  .lisp      Lisp source file in Common Lisp
+  .scm	     Lisp source file the Scheme dialect
+
+  .txt       A plain text file
+  .ps        PostScript file
+  .mif       Framemaker interchange format. The same as RTF. 
+             Your word formatter might be able to read this file.
+
+----------------------------------------------------------------------
+
+If you have questions or comments about the programs or information in
+these directories, you can send your questions to Professor Tom Dean,
+tld@cs.brown.edu.
+
+
